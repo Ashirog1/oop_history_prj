@@ -17,13 +17,13 @@ public class Components {
 
     /**
      * Hàm trả về 1 gridPane chứa danh sách nhân vật gồm 1 image và tên bên dưới
-     * */
+     */
     public static GridPane personList(List<Person> personObservableList) {
         GridPane gridPane = new GridPane();
         gridPane.setVgap(20);
         int row = 0;
         int column = 0;
-        for(Person item: personObservableList) {
+        for (Person item : personObservableList) {
             VBox vBox = new VBox();
             vBox.setMinWidth(200);
             GridPane.setRowIndex(vBox, row);
@@ -41,7 +41,7 @@ public class Components {
             ImageView avatar = new ImageView();
             Image image = null;
             try {
-                image = new Image(Objects.requireNonNull(Components.class.getResource("/app/data/img/person/"+ item.getId() +".png")).openStream());
+                image = new Image(Objects.requireNonNull(Components.class.getResource("/app/data/img/person/" + item.getId() + ".png")).openStream());
             } catch (Exception e) {
                 try {
                     image = new Image(Objects.requireNonNull(Components.class.getResource("/app/data/img/person/no_image.png")).openStream());

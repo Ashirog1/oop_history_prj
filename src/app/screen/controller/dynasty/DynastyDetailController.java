@@ -16,15 +16,12 @@ import java.util.Objects;
 
 public class DynastyDetailController extends DetailBaseController {
 
+    private final Dynasty dynastyData;
     @FXML
     private VBox mainContent;
-
     @FXML
     private VBox sideBar;
-
     private Button currentSideBarBtn;
-
-    private final Dynasty dynastyData;
 
     public DynastyDetailController(Dynasty dynastyData) {
         this.dynastyData = dynastyData;
@@ -43,17 +40,17 @@ public class DynastyDetailController extends DetailBaseController {
         // clear old data
         sideBar.getChildren().clear();
 
-        if(Storage.filteredDynasties.isEmpty()) {
+        if (Storage.filteredDynasties.isEmpty()) {
             Label emptyLabel = new Label();
             emptyLabel.getStyleClass().add("empty-label");
             emptyLabel.setText("Danh sách trống ><!");
             sideBar.getChildren().add(emptyLabel);
         }
-        for (Dynasty item: Storage.filteredDynasties) {
+        for (Dynasty item : Storage.filteredDynasties) {
             Button sideBarBtn = new Button();
             sideBarBtn.setText("> " + item.getName());
             sideBarBtn.getStyleClass().add("side-bar-btn");
-            if(Objects.equals(item.getId(), dynastyData.getId())) {
+            if (Objects.equals(item.getId(), dynastyData.getId())) {
                 currentSideBarBtn = sideBarBtn;
                 sideBarBtn.getStyleClass().add("current-content-btn");
             }

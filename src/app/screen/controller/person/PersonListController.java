@@ -35,7 +35,7 @@ public class PersonListController {
         // clear old data
         paginationContainer.getChildren().clear();
 
-        if(Storage.filteredPersons.isEmpty()) {
+        if (Storage.filteredPersons.isEmpty()) {
             Label emptyLabel = new Label();
             emptyLabel.getStyleClass().add("text-title");
             emptyLabel.setText("Không có kết quả nào ><!");
@@ -45,7 +45,7 @@ public class PersonListController {
         } else {
             //Create pagination
             Pagination pagination = new Pagination();
-            pagination.setPageCount(Storage.filteredPersons.size()/12 + 1);
+            pagination.setPageCount(Storage.filteredPersons.size() / 12 + 1);
             pagination.setCurrentPageIndex(0);
             pagination.setMaxPageIndicatorCount(5);
 
@@ -57,20 +57,20 @@ public class PersonListController {
 
                 int startItemIndex = 12 * pagination.getCurrentPageIndex();
                 int endItemIndex = startItemIndex + 12;
-                if(endItemIndex > Storage.filteredPersons.size()) endItemIndex = Storage.filteredPersons.size();
+                if (endItemIndex > Storage.filteredPersons.size()) endItemIndex = Storage.filteredPersons.size();
 
-                for (Person item: Storage.filteredPersons.subList(startItemIndex, endItemIndex)){
+                for (Person item : Storage.filteredPersons.subList(startItemIndex, endItemIndex)) {
                     VBox vBox = new VBox();
                     vBox.setMinWidth(200);
 
-                    Label personName = new Label(item.getName().toString());
+                    Label personName = new Label(item.getName());
                     personName.getStyleClass().add("text-title");
                     personName.setCursor(Cursor.HAND);
 
                     ImageView avatar = new ImageView();
                     Image image = null;
                     try {
-                        image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/"+ item.getId() +".png")).openStream());
+                        image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/" + item.getId() + ".png")).openStream());
                     } catch (Exception e) {
                         try {
                             image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/no_image.png")).openStream());
@@ -86,11 +86,11 @@ public class PersonListController {
                     dynastyName.setWrappingWidth(200);
                     dynastyName.getStyleClass().add("text-description");
 
-                    Text date = new Text( item.getDateOfBirth().toString() + " - " + item.getDateOfDeath().toString() );
+                    Text date = new Text(item.getDateOfBirth() + " - " + item.getDateOfDeath());
                     date.setWrappingWidth(200);
                     date.getStyleClass().add("text-description");
 
-                    vBox.getChildren().addAll(avatar, personName,  dynastyName, date);
+                    vBox.getChildren().addAll(avatar, personName, dynastyName, date);
 
                     //constraint grid pane col and row index
                     GridPane.setColumnIndex(vBox, gridCol);
@@ -98,7 +98,7 @@ public class PersonListController {
 
                     gridPane.getChildren().add(vBox);
                     gridCol++;
-                    if (gridCol == 4){
+                    if (gridCol == 4) {
                         gridCol = 0;
                         gridRow++;
                     }

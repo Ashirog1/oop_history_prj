@@ -26,7 +26,7 @@ public class DynastyListController {
         // clear old data
         gridPane.getChildren().clear();
 
-        if(Storage.filteredDynasties.isEmpty()) {
+        if (Storage.filteredDynasties.isEmpty()) {
             Label emptyLabel = new Label();
             emptyLabel.getStyleClass().add("text-title");
             emptyLabel.setText("Không có kết quả nào ><!");
@@ -34,7 +34,7 @@ public class DynastyListController {
         } else {
             int gridCol = 0;
             int gridRow = 0;
-            for (Dynasty item: Storage.filteredDynasties){
+            for (Dynasty item : Storage.filteredDynasties) {
                 VBox vBox = new VBox();
                 vBox.setMinWidth(200);
 
@@ -50,7 +50,7 @@ public class DynastyListController {
 
                 gridPane.getChildren().add(vBox);
                 gridCol++;
-                if (gridCol == 4){
+                if (gridCol == 4) {
                     gridCol = 0;
                     gridRow++;
                 }

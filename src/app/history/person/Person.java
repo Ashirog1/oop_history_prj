@@ -5,119 +5,119 @@ import app.history.dynasty.Dynasty;
 import app.history.storage.Storage;
 
 public class Person {
-	private int id;
-	private String name;
-	private String givenName = "Không rõ";
-	private String father = "Không rõ", reign;
-	private String dateOfBirth = "Không rõ";
-	private String dateOfDeath = "Không rõ";
-	private String description;
-	private Dynasty dynasty;
-	private String dynastyName;
-	private static int nbPerson = 0;
+    private static int nbPerson = 0;
+    private int id;
+    private String name;
+    private String givenName = "Không rõ";
+    private String father = "Không rõ", reign;
+    private String dateOfBirth = "Không rõ";
+    private String dateOfDeath = "Không rõ";
+    private String description;
+    private Dynasty dynasty;
+    private String dynastyName;
 
-	public int getId() {
-		return id;
-	}
+    public Person() {
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Person(String name) {
+        this.name = name;
+    }
 
-	public String getGivenName() {
-		return givenName;
-	}
+    public Person(String name, String givenName, String father, String reign, String dob, String dod, String desc, String dynasty) {
+        this.id = ++nbPerson;
+        this.name = name;
+        this.givenName = givenName;
+        this.father = father;
+        this.reign = reign;
+        this.dateOfBirth = dob;
+        this.dateOfDeath = dod;
+        this.description = desc;
+        this.dynastyName = dynasty;
+    }
 
-	public String getFather() {
-		return father;
-	}
+    public static void resetId() {
+        nbPerson = 0;
+    }
 
-	public String getReign() {
-		return reign;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDateOfDeath() {
-		return dateOfDeath;
-	}
+    public String getGivenName() {
+        return givenName;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
 
-	public Dynasty getDynasty() {
-		return dynasty;
-	}
+    public String getFather() {
+        return father;
+    }
 
-	public String getDynastyName() {
-		return dynastyName;
-	}
+    public void setFather(String father) {
+        this.father = father;
+    }
 
-	public void setDynasty() {
-		int index = Storage.dynasties.indexOf(new Dynasty(dynastyName));
-		if (index != -1){
-			dynasty = Storage.dynasties.get(index);
-			System.out.println("Them thanh cong " + dynastyName);
-		} else {
-			System.out.println("Khong thanh cong" + dynastyName);
-		}
-	}
+    public String getReign() {
+        return reign;
+    }
 
-	public Person() {};
+    public void setReign(String reign) {
+        this.reign = reign;
+    }
 
-	public Person(String name) {
-		this.name = name;
-	}
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-	public Person(String name, String givenName, String father, String reign, String dob, String dod, String desc, String dynasty) {
-		this.id = ++nbPerson;
-		this.name = name;
-		this.givenName = givenName;
-		this.father = father;
-		this.reign = reign;
-		this.dateOfBirth = dob;
-		this.dateOfDeath = dod;
-		this.description = desc;
-		this.dynastyName = dynasty;
-	}
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Person) {
-			Person p2 = (Person) obj;
-			return getName().equals(p2.getName());
-		}
-		return false;
-	}
+    public String getDateOfDeath() {
+        return dateOfDeath;
+    }
 
-	public void setGivenName(String givenName) {
-		this.givenName = givenName;
-	}
+    public void setDateOfDeath(String dateOfDeath) {
+        this.dateOfDeath = dateOfDeath;
+    }
 
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDateOfDeath(String dateOfDeath) {
-		this.dateOfDeath = dateOfDeath;
-	}
+    public Dynasty getDynasty() {
+        return dynasty;
+    }
 
-	public void setFather(String father) {
-		this.father = father;
-	}
+    public String getDynastyName() {
+        return dynastyName;
+    }
 
-	public void setDynastyName(String dynastyName) {
-		this.dynastyName = dynastyName;
-	}
+    public void setDynastyName(String dynastyName) {
+        this.dynastyName = dynastyName;
+    }
 
-	public void setReign(String reign) {
-		this.reign = reign;
-	}
+    public void setDynasty() {
+        int index = Storage.dynasties.indexOf(new Dynasty(dynastyName));
+        if (index != -1) {
+            dynasty = Storage.dynasties.get(index);
+            System.out.println("Them thanh cong " + dynastyName);
+        } else {
+            System.out.println("Khong thanh cong" + dynastyName);
+        }
+    }
 
-	public static void resetId() {
-		nbPerson = 0;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Person p2) {
+            return getName().equals(p2.getName());
+        }
+        return false;
+    }
 }

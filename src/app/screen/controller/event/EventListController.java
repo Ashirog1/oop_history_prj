@@ -35,7 +35,7 @@ public class EventListController {
         // clear old data
         paginationContainer.getChildren().clear();
 
-        if(Storage.filteredEvents.isEmpty()) {
+        if (Storage.filteredEvents.isEmpty()) {
             Label emptyLabel = new Label();
             emptyLabel.getStyleClass().add("text-title");
             emptyLabel.setText("Không có kết quả nào ><!");
@@ -45,7 +45,7 @@ public class EventListController {
         } else {
             //Create pagination
             Pagination pagination = new Pagination();
-            pagination.setPageCount(Storage.filteredEvents.size()/12 + 1);
+            pagination.setPageCount(Storage.filteredEvents.size() / 12 + 1);
             pagination.setCurrentPageIndex(0);
             pagination.setMaxPageIndicatorCount(5);
 
@@ -57,9 +57,9 @@ public class EventListController {
 
                 int startItemIndex = 12 * pagination.getCurrentPageIndex();
                 int endItemIndex = startItemIndex + 12;
-                if(endItemIndex > Storage.filteredEvents.size()) endItemIndex = Storage.filteredEvents.size();
+                if (endItemIndex > Storage.filteredEvents.size()) endItemIndex = Storage.filteredEvents.size();
 
-                for (Event item: Storage.filteredEvents.subList(startItemIndex, endItemIndex)){
+                for (Event item : Storage.filteredEvents.subList(startItemIndex, endItemIndex)) {
                     VBox vBox = new VBox();
                     vBox.setMinWidth(200);
 
@@ -84,7 +84,7 @@ public class EventListController {
                     eventTime.setWrappingWidth(200);
                     eventTime.getStyleClass().add("text-description");
 
-                    vBox.getChildren().addAll(eventImage, eventName,  eventTime);
+                    vBox.getChildren().addAll(eventImage, eventName, eventTime);
                     vBox.setMaxWidth(200);
 
                     //constrait grid pane col and row index
@@ -93,7 +93,7 @@ public class EventListController {
 
                     gridPane.getChildren().add(vBox);
                     gridCol++;
-                    if (gridCol == 4){
+                    if (gridCol == 4) {
                         gridCol = 0;
                         gridRow++;
                     }

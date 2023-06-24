@@ -44,31 +44,51 @@ public class ContentController {
 
     private static String currentPane = "unknown";
 
-    public static void setContentArea(StackPane contentArea) { ContentController.contentArea = contentArea; }
-    public static void setDynastyBtn(Button dynastyBtn) { ContentController.dynastyBtn = dynastyBtn; }
-    public static void setEventBtn(Button eventBtn) { ContentController.eventBtn = eventBtn; }
-    public static void setFestivalBtn(Button festivalBtn) { ContentController.festivalBtn = festivalBtn; }
-    public static void setPersonBtn(Button personBtn) { ContentController.personBtn = personBtn; }
-    public static void setRelicBtn(Button relicBtn) { ContentController.relicBtn = relicBtn; }
-    public static void setTfSearch(TextField tfSearch) { ContentController.tfSearch = tfSearch; }
+    public static void setContentArea(StackPane contentArea) {
+        ContentController.contentArea = contentArea;
+    }
+
+    public static void setDynastyBtn(Button dynastyBtn) {
+        ContentController.dynastyBtn = dynastyBtn;
+    }
+
+    public static void setEventBtn(Button eventBtn) {
+        ContentController.eventBtn = eventBtn;
+    }
+
+    public static void setFestivalBtn(Button festivalBtn) {
+        ContentController.festivalBtn = festivalBtn;
+    }
+
+    public static void setPersonBtn(Button personBtn) {
+        ContentController.personBtn = personBtn;
+    }
+
+    public static void setRelicBtn(Button relicBtn) {
+        ContentController.relicBtn = relicBtn;
+    }
+
+    public static void setTfSearch(TextField tfSearch) {
+        ContentController.tfSearch = tfSearch;
+    }
 
     public static void goToDetail(DetailBaseController controller) {
         // xóa từ khóa đang tìm kiếm trong text field search
         tfSearch.setText("");
 
-        if(controller instanceof DynastyDetailController) {
+        if (controller instanceof DynastyDetailController) {
             selectMenu(dynastyBtn);
             currentPane = "dynasty";
         }
-        if(controller instanceof EventDetailController) {
+        if (controller instanceof EventDetailController) {
             selectMenu(eventBtn);
             currentPane = "event";
         }
-        if(controller instanceof PersonDetailController) {
+        if (controller instanceof PersonDetailController) {
             selectMenu(personBtn);
             currentPane = "person";
         }
-        if(controller instanceof RelicDetailController) {
+        if (controller instanceof RelicDetailController) {
             selectMenu(relicBtn);
             currentPane = "relic";
         }
@@ -164,13 +184,14 @@ public class ContentController {
             case "relic" -> {
                 Storage.searchRelic(searchString);
             }
-            default -> {}
+            default -> {
+            }
         }
     }
 
     /**
      * Hàm reset trạng thái css của menu đang được chọn trong head bar và đặt trạng thái mới cho menu được chọn
-     * */
+     */
     private static void selectMenu(Button menuBtn) {
         // clear current navBar selected menu css
         switch (currentPane) {
@@ -194,7 +215,8 @@ public class ContentController {
                 relicBtn.getStyleClass().add("menu-bar");
                 relicBtn.getStyleClass().remove("selected-menu");
             }
-            default -> {}
+            default -> {
+            }
         }
 
         // set selected navBar selected menu
@@ -204,7 +226,7 @@ public class ContentController {
 
     /**
      * Hàm render dữ liệu mới vào trong content area
-     * */
+     */
     private static void loadPane(Object controller) {
         // xóa dữ liệu đang hiển thị trong content area
         contentArea.getChildren().clear();

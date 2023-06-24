@@ -21,15 +21,12 @@ import java.util.Objects;
 
 public class PersonDetailController extends DetailBaseController {
 
+    private final Person personData;
     @FXML
     private VBox mainContent;
-
     @FXML
     private VBox sideBar;
-
     private Button currentSideBarBtn;
-
-    private final Person personData;
 
     public PersonDetailController(Person personData) {
         this.personData = personData;
@@ -48,17 +45,17 @@ public class PersonDetailController extends DetailBaseController {
         // clear old data
         sideBar.getChildren().clear();
 
-        if(Storage.filteredPersons.isEmpty()) {
+        if (Storage.filteredPersons.isEmpty()) {
             Label emptyLabel = new Label();
             emptyLabel.getStyleClass().add("empty-label");
             emptyLabel.setText("Danh sách trống ><!");
             sideBar.getChildren().add(emptyLabel);
         }
-        for (Person item: Storage.filteredPersons) {
+        for (Person item : Storage.filteredPersons) {
             Button sideBarBtn = new Button();
             sideBarBtn.setText("> " + item.getName());
             sideBarBtn.getStyleClass().add("side-bar-btn");
-            if(Objects.equals(item.getId(), personData.getId())) {
+            if (Objects.equals(item.getId(), personData.getId())) {
                 currentSideBarBtn = sideBarBtn;
                 sideBarBtn.getStyleClass().add("current-content-btn");
             }
@@ -79,7 +76,7 @@ public class PersonDetailController extends DetailBaseController {
         ImageView avatar = new ImageView();
         Image image = null;
         try {
-            image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/"+ currentPerson.getId() +".png")).openStream());
+            image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/" + currentPerson.getId() + ".png")).openStream());
         } catch (Exception e) {
             try {
                 image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/no_image.png")).openStream());
@@ -128,7 +125,7 @@ public class PersonDetailController extends DetailBaseController {
         Label personDynasty = new Label();
         Dynasty dynasty = currentPerson.getDynasty();
         String text = "Triều Đại: ";
-        if(dynasty != null) {
+        if (dynasty != null) {
             text += currentPerson.getDynasty().getName();
             personDynasty.setOnMouseClicked(event -> {
                 DynastyDetailController dynastyDetailController = new DynastyDetailController(dynasty);

@@ -33,7 +33,7 @@ public class RelicListController {
         // clear old data
         paginationContainer.getChildren().clear();
 
-        if(Storage.filteredRelics.isEmpty()) {
+        if (Storage.filteredRelics.isEmpty()) {
             Label emptyLabel = new Label();
             emptyLabel.getStyleClass().add("text-title");
             emptyLabel.setText("Không có kết quả nào ><!");
@@ -43,7 +43,7 @@ public class RelicListController {
         } else {
             //Create pagination
             Pagination pagination = new Pagination();
-            pagination.setPageCount(Storage.filteredRelics.size()/12 + 1);
+            pagination.setPageCount(Storage.filteredRelics.size() / 12 + 1);
             pagination.setCurrentPageIndex(0);
             pagination.setMaxPageIndicatorCount(5);
 
@@ -55,9 +55,9 @@ public class RelicListController {
 
                 int startItemIndex = 12 * pagination.getCurrentPageIndex();
                 int endItemIndex = startItemIndex + 12;
-                if(endItemIndex > Storage.filteredRelics.size()) endItemIndex = Storage.filteredRelics.size();
+                if (endItemIndex > Storage.filteredRelics.size()) endItemIndex = Storage.filteredRelics.size();
 
-                for (Relic item: Storage.filteredRelics.subList(startItemIndex, endItemIndex)){
+                for (Relic item : Storage.filteredRelics.subList(startItemIndex, endItemIndex)) {
                     VBox vBox = new VBox();
                     vBox.setMinWidth(200);
 
@@ -70,7 +70,7 @@ public class RelicListController {
                     ImageView relicImage = new ImageView();
                     Image image = null;
                     try {
-                        image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/relic/"+ item.getImgUrl())).openStream());
+                        image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/relic/" + item.getImgUrl())).openStream());
                     } catch (Exception e) {
                         image = null;
                     }
@@ -87,7 +87,7 @@ public class RelicListController {
 
                     gridPane.getChildren().add(vBox);
                     gridCol++;
-                    if (gridCol == 4){
+                    if (gridCol == 4) {
                         gridCol = 0;
                         gridRow++;
                     }
@@ -103,5 +103,5 @@ public class RelicListController {
             VBox paginationVBox = new VBox(pagination);
             paginationContainer.getChildren().add(paginationVBox);
         }
-        }
+    }
 }

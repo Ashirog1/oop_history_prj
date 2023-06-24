@@ -17,14 +17,12 @@ import javafx.scene.layout.VBox;
 import java.util.Objects;
 
 public class EventDetailController extends DetailBaseController {
+    private final Event eventData;
     @FXML
     private VBox mainContent;
     @FXML
     private VBox sideBar;
-
     private Button currentSideBarBtn;
-
-    private final Event eventData;
 
     public EventDetailController(Event eventData) {
         this.eventData = eventData;
@@ -43,17 +41,17 @@ public class EventDetailController extends DetailBaseController {
         // clear old data
         sideBar.getChildren().clear();
 
-        if(Storage.filteredEvents.isEmpty()) {
+        if (Storage.filteredEvents.isEmpty()) {
             Label emptyLabel = new Label();
             emptyLabel.getStyleClass().add("empty-label");
             emptyLabel.setText("Danh sách trống ><!");
             sideBar.getChildren().add(emptyLabel);
         }
-        for (Event item: Storage.filteredEvents) {
+        for (Event item : Storage.filteredEvents) {
             Button sideBarBtn = new Button();
             sideBarBtn.setText("> " + item.getName());
             sideBarBtn.getStyleClass().add("side-bar-btn");
-            if(Objects.equals(item.getId(), eventData.getId())) {
+            if (Objects.equals(item.getId(), eventData.getId())) {
                 currentSideBarBtn = sideBarBtn;
                 sideBarBtn.getStyleClass().add("current-content-btn");
             }

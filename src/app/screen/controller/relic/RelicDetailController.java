@@ -17,14 +17,12 @@ import javafx.scene.layout.VBox;
 import java.util.Objects;
 
 public class RelicDetailController extends DetailBaseController {
+    private final Relic relicData;
     @FXML
     private VBox mainContent;
     @FXML
     private VBox sideBar;
-
     private Button currentSideBarBtn;
-
-    private final Relic relicData;
 
     public RelicDetailController(Relic relicData) {
         this.relicData = relicData;
@@ -43,17 +41,17 @@ public class RelicDetailController extends DetailBaseController {
         // clear old data
         sideBar.getChildren().clear();
 
-        if(Storage.filteredRelics.isEmpty()) {
+        if (Storage.filteredRelics.isEmpty()) {
             Label emptyLabel = new Label();
             emptyLabel.getStyleClass().add("empty-label");
             emptyLabel.setText("Danh sách trống ><!");
             sideBar.getChildren().add(emptyLabel);
         }
-        for (Relic item: Storage.filteredRelics) {
+        for (Relic item : Storage.filteredRelics) {
             Button sideBarBtn = new Button();
             sideBarBtn.setText("> " + item.getTitle());
             sideBarBtn.getStyleClass().add("side-bar-btn");
-            if(Objects.equals(item.getId(), relicData.getId())) {
+            if (Objects.equals(item.getId(), relicData.getId())) {
                 currentSideBarBtn = sideBarBtn;
                 sideBarBtn.getStyleClass().add("current-content-btn");
             }
@@ -74,7 +72,7 @@ public class RelicDetailController extends DetailBaseController {
         ImageView relicImage = new ImageView();
         Image image = null;
         try {
-            image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/relic/"+ relicData.getImgUrl())).openStream());
+            image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/relic/" + relicData.getImgUrl())).openStream());
         } catch (Exception e) {
             image = null;
         }
@@ -87,7 +85,7 @@ public class RelicDetailController extends DetailBaseController {
         relicTitle.setPadding(new Insets(20, 0, 20, 0));
         relicTitle.setWrapText(true);
 
-        Label relicContent = new Label(""+relicData.getContent());
+        Label relicContent = new Label(relicData.getContent());
         relicContent.getStyleClass().add("content");
         relicContent.setPadding(new Insets(0, 0, 10, 0));
         relicContent.setWrapText(true);

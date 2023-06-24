@@ -1,12 +1,12 @@
 package app.screen.controller;
 
-import java.io.IOException;
-
 import app.history.storage.Storage;
 import app.screen.controller.components.Transition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
+
+import java.io.IOException;
 
 public class HomeController {
 

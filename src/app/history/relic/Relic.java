@@ -1,108 +1,109 @@
 package app.history.relic;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import app.history.person.Person;
 import app.history.storage.Storage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Relic {
-	// id = ++cnt; cnt dùng để đếm
-	public static int cnt = 0;
-	int id;
+    // id = ++cnt; cnt dùng để đếm
+    public static int cnt = 0;
+    int id;
 
-	String title;
-	String content;
-	String address;
-	ObservableList<Person> relatedHistoricalPerson = FXCollections.observableArrayList();
-	// danh sách tên người liên quan
-	List<String> nameList = new ArrayList<String>();
-	// danh sách ảnh liên quan đến di tích
-	String imgUrl;
+    String title;
+    String content;
+    String address;
+    ObservableList<Person> relatedHistoricalPerson = FXCollections.observableArrayList();
+    // danh sách tên người liên quan
+    List<String> nameList = new ArrayList<String>();
+    // danh sách ảnh liên quan đến di tích
+    String imgUrl;
 
-	public Relic() {}
+    public Relic() {
+    }
 
-	public Relic(String title, String content, String address, List<String> nameList, String imgUrl) {
-		this.id = ++cnt;
-		this.title = title;
-		this.content = content;
-		this.address = address;
-		this.nameList = nameList;
-		this.imgUrl = imgUrl;
-	}
-	public int getId() {return id;}
+    public Relic(String title, String content, String address, List<String> nameList, String imgUrl) {
+        this.id = ++cnt;
+        this.title = title;
+        this.content = content;
+        this.address = address;
+        this.nameList = nameList;
+        this.imgUrl = imgUrl;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public static void resetId() {
+        cnt = 0;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public List<String> getNameList() {
-		return nameList;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public String getImgUrl() {
-		return imgUrl;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public void setRelatedHistoricalPerson(ObservableList<Person> relatedHistoricalPerson) {
-		this.relatedHistoricalPerson = relatedHistoricalPerson;
-	}
+    public List<String> getNameList() {
+        return nameList;
+    }
 
-	/**
-	 * Đinh nghĩa bằng nhau khi title của chúng bằng nhau
-	 *
-	 * @return true : if (name2 == name2)
-	 *
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Relic) {
-			Relic relic = (Relic) obj;
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    /**
+     * Đinh nghĩa bằng nhau khi title của chúng bằng nhau
+     *
+     * @return true : if (name2 == name2)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Relic relic) {
 			return relic.getTitle().equals(this.title);
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	public ObservableList<Person> getRelatedHistoricalPerson() {
-		return relatedHistoricalPerson;
-	}
+    public ObservableList<Person> getRelatedHistoricalPerson() {
+        return relatedHistoricalPerson;
+    }
 
-	public void addPerson() {
-		for (String name : nameList) {
-			Person person = new Person(name);
-			int index = Storage.persons.indexOf(person);
-			if (index != -1 && !relatedHistoricalPerson.contains(person)) {
-				relatedHistoricalPerson.add(Storage.persons.get(index));
-				System.out.println("Them thanh cong " + name);
-			} else {
-				System.out.println("Khong thanh cong " + name);
-			}
-		}
-	}
+    public void setRelatedHistoricalPerson(ObservableList<Person> relatedHistoricalPerson) {
+        this.relatedHistoricalPerson = relatedHistoricalPerson;
+    }
 
-	/**
-	 * Hàm này dùng để thêm nhân vật lịch sử vào relatedHistoricalPerson
-	 *
-	 */
-	public void addHistoricalPerson(Person person) {
-		// check if person not exist in relatedHistoricalPerson. If not I will add
-		if (!relatedHistoricalPerson.contains(person)) {
-			relatedHistoricalPerson.add(person);
-		} else
-			System.out.print("This person has existed");
-	}
+    public void addPerson() {
+        for (String name : nameList) {
+            Person person = new Person(name);
+            int index = Storage.persons.indexOf(person);
+            if (index != -1 && !relatedHistoricalPerson.contains(person)) {
+                relatedHistoricalPerson.add(Storage.persons.get(index));
+                System.out.println("Them thanh cong " + name);
+            } else {
+                System.out.println("Khong thanh cong " + name);
+            }
+        }
+    }
 
-	public static void resetId() {
-		cnt = 0;
-	}
+    /**
+     * Hàm này dùng để thêm nhân vật lịch sử vào relatedHistoricalPerson
+     */
+    public void addHistoricalPerson(Person person) {
+        // check if person not exist in relatedHistoricalPerson. If not I will add
+        if (!relatedHistoricalPerson.contains(person)) {
+            relatedHistoricalPerson.add(person);
+        } else
+            System.out.print("This person has existed");
+    }
 }

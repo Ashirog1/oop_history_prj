@@ -10,6 +10,10 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class App extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/app/screen/fxml/home.fxml")));
@@ -20,9 +24,5 @@ public class App extends Application {
         stage.setScene(scene);
         Transition.setRootStage(stage);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
