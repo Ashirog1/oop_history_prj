@@ -84,16 +84,19 @@ public class RelicDetailController extends DetailBaseController {
         relicTitle.getStyleClass().add("title");
         relicTitle.setPadding(new Insets(20, 0, 20, 0));
         relicTitle.setWrapText(true);
+        relicTitle.setStyle("-fx-text-fill: gray");
 
         Label relicContent = new Label(relicData.getContent());
         relicContent.getStyleClass().add("content");
         relicContent.setPadding(new Insets(0, 0, 10, 0));
         relicContent.setWrapText(true);
+        relicContent.setStyle("-fx-text-fill: gray");
 
         Label relicDestination = new Label("Địa điểm: " + relicData.getAddress());
         relicDestination.getStyleClass().add("content");
         relicDestination.setPadding(new Insets(0, 0, 10, 0));
         relicDestination.setWrapText(true);
+        relicDestination.setStyle("-fx-text-fill: gray");
 
         GridPane personList = Components.personList(relicData.getRelatedHistoricalPerson());
 

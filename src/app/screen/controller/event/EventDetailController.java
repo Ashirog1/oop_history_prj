@@ -84,21 +84,25 @@ public class EventDetailController extends DetailBaseController {
         eventName.getStyleClass().add("title");
         eventName.setPadding(new Insets(20, 0, 20, 0));
         eventName.setWrapText(true);
+        eventName.setStyle("-fx-text-fill: gray");
 
         Label eventTime = new Label("Thời gian: " + eventData.getTime());
         eventTime.getStyleClass().add("content");
         eventTime.setPadding(new Insets(0, 0, 10, 0));
         eventTime.setWrapText(true);
+        eventTime.setStyle("-fx-text-fill: gray");
 
         Label eventDestination = new Label("Địa điểm: " + eventData.getDestination());
         eventDestination.getStyleClass().add("content");
         eventDestination.setPadding(new Insets(0, 0, 10, 0));
         eventDestination.setWrapText(true);
+        eventDestination.setStyle("-fx-text-fill: gray");
 
         Label eventDescription = new Label("Thông tin chi tiết: " + eventData.getDescription());
         eventDescription.getStyleClass().add("content");
         eventDescription.setPadding(new Insets(0, 0, 10, 0));
         eventDescription.setWrapText(true);
+        eventDescription.setStyle("-fx-text-fill: gray");
 
         GridPane personList = Components.personList(eventData.getRelativePersons());
 

@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -78,11 +79,7 @@ public class PersonDetailController extends DetailBaseController {
         try {
             image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/" + currentPerson.getId() + ".png")).openStream());
         } catch (Exception e) {
-            try {
-                image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/no_image.png")).openStream());
-            } catch (IOException ex) {
-                image = null;
-            }
+            image = null;
         }
         avatar.setImage(image);
         avatar.setFitWidth(400);
@@ -92,35 +89,44 @@ public class PersonDetailController extends DetailBaseController {
         personName.getStyleClass().add("title");
         personName.setPadding(new Insets(20, 0, 20, 0));
         personName.setWrapText(true);
+        personName.setStyle("-fx-text-fill: white");
 
         Label personGivenName = new Label("Tên gọi khác: " + currentPerson.getGivenName());
         personGivenName.getStyleClass().add("content");
         personGivenName.setPadding(new Insets(0, 0, 10, 0));
         personGivenName.setWrapText(true);
+        personGivenName.setStyle("-fx-text-fill: white");
 
         Label personFather = new Label("Tên cha: " + currentPerson.getFather());
         personFather.getStyleClass().add("content");
         personFather.setPadding(new Insets(0, 0, 10, 0));
         personFather.setWrapText(true);
+        personFather.setStyle("-fx-text-fill: white");
 
         Label personReign = new Label("Thời gian cai trị: " + currentPerson.getReign());
         personReign.getStyleClass().add("content");
         personReign.setPadding(new Insets(0, 0, 10, 0));
         personReign.setWrapText(true);
+        personReign.setStyle("-fx-text-fill: white");
 
         Label personDateOfBirth = new Label("Sinh: " + currentPerson.getDateOfBirth());
         personDateOfBirth.getStyleClass().add("content");
         personDateOfBirth.setPadding(new Insets(0, 0, 10, 0));
         personDateOfBirth.setWrapText(true);
+        personDateOfBirth.setStyle("-fx-text-fill: white");
 
         Label personDateOfDeath = new Label("Mất: " + currentPerson.getDateOfDeath());
         personDateOfDeath.getStyleClass().add("content");
         personDateOfDeath.setPadding(new Insets(0, 0, 10, 0));
         personDateOfDeath.setWrapText(true);
+        personDateOfDeath.setStyle("-fx-text-fill: white");
 
         Text personDescription = new Text(currentPerson.getDescription());
         personDescription.getStyleClass().add("description");
         personDescription.setWrappingWidth(500);
+        personDescription.setFill(Color.GRAY);
+        System.out.println(currentPerson.getDescription());
+
 
         Label personDynasty = new Label();
         Dynasty dynasty = currentPerson.getDynasty();
@@ -139,6 +145,7 @@ public class PersonDetailController extends DetailBaseController {
         personDynasty.getStyleClass().add("dynasty");
         personDynasty.setPadding(new Insets(10, 0, 0, 0));
         personDynasty.setWrapText(true);
+        personDynasty.setStyle("-fx-text-fill: white");
 
         mainContent.getChildren().clear();
         mainContent.getChildren().addAll(

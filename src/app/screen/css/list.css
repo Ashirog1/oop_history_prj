@@ -3,9 +3,9 @@
     -fx-font-weight:700;
 }
 .text-title:hover{
-    -fx-text-fill: #f59c75;
+    -fx-text-fill: #ffffff;
 }
 .text-description {
     -fx-font-size: 16px;
-    -fx-font-fill: #474745;
+    -fx-font-fill: #ffffff;
 }

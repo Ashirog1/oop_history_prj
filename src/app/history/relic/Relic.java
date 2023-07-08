@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Relic {
-    // id = ++cnt; cnt dùng để đếm
     public static int cnt = 0;
     int id;
 
@@ -17,9 +16,7 @@ public class Relic {
     String content;
     String address;
     ObservableList<Person> relatedHistoricalPerson = FXCollections.observableArrayList();
-    // danh sách tên người liên quan
     List<String> nameList = new ArrayList<String>();
-    // danh sách ảnh liên quan đến di tích
     String imgUrl;
 
     public Relic() {
@@ -62,11 +59,6 @@ public class Relic {
         return imgUrl;
     }
 
-    /**
-     * Đinh nghĩa bằng nhau khi title của chúng bằng nhau
-     *
-     * @return true : if (name2 == name2)
-     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Relic relic) {
@@ -89,16 +81,13 @@ public class Relic {
             int index = Storage.persons.indexOf(person);
             if (index != -1 && !relatedHistoricalPerson.contains(person)) {
                 relatedHistoricalPerson.add(Storage.persons.get(index));
-                System.out.println("Them thanh cong " + name);
+                System.out.println("success add " + name);
             } else {
-                System.out.println("Khong thanh cong " + name);
+                System.out.println("failed to add " + name);
             }
         }
     }
 
-    /**
-     * Hàm này dùng để thêm nhân vật lịch sử vào relatedHistoricalPerson
-     */
     public void addHistoricalPerson(Person person) {
         // check if person not exist in relatedHistoricalPerson. If not I will add
         if (!relatedHistoricalPerson.contains(person)) {

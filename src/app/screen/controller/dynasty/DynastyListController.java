@@ -60,6 +60,7 @@ public class DynastyListController {
                     DynastyDetailController dynastyDetailController = new DynastyDetailController(item);
                     ContentController.goToDetail(dynastyDetailController);
                 });
+                dynastyName.setStyle("-fx-text-fill: gray");
             }
         }
     }

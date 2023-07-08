@@ -43,11 +43,7 @@ public class Components {
             try {
                 image = new Image(Objects.requireNonNull(Components.class.getResource("/app/data/img/person/" + item.getId() + ".png")).openStream());
             } catch (Exception e) {
-                try {
-                    image = new Image(Objects.requireNonNull(Components.class.getResource("/app/data/img/person/no_image.png")).openStream());
-                } catch (IOException ex) {
-                    image = null;
-                }
+                image = null;
             }
             avatar.setImage(image);
             avatar.setFitWidth(150);

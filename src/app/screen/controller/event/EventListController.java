@@ -68,6 +68,7 @@ public class EventListController {
                     eventName.setCursor(Cursor.HAND);
                     eventName.setMaxWidth(200);
                     eventName.setWrapText(true);
+                    eventName.setStyle("-fx-text-fill: gray");
 
                     ImageView eventImage = new ImageView();
                     Image image = null;

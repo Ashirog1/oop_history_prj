@@ -72,11 +72,7 @@ public class PersonListController {
                     try {
                         image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/" + item.getId() + ".png")).openStream());
                     } catch (Exception e) {
-                        try {
-                            image = new Image(Objects.requireNonNull(getClass().getResource("/app/data/img/person/no_image.png")).openStream());
-                        } catch (IOException ex) {
-                            image = null;
-                        }
+                        image = null;
                     }
                     avatar.setImage(image);
                     avatar.setFitWidth(200);
@@ -85,10 +81,12 @@ public class PersonListController {
                     Text dynastyName = new Text(item.getDynastyName());
                     dynastyName.setWrappingWidth(200);
                     dynastyName.getStyleClass().add("text-description");
+                    dynastyName.setStyle("-fx-text-fill: gray");
 
                     Text date = new Text(item.getDateOfBirth() + " - " + item.getDateOfDeath());
                     date.setWrappingWidth(200);
                     date.getStyleClass().add("text-description");
+                    date.setStyle("-fx-text-fill: gray");
 
                     vBox.getChildren().addAll(avatar, personName, dynastyName, date);
 
@@ -108,6 +106,7 @@ public class PersonListController {
                         PersonDetailController personDetailController = new PersonDetailController(item);
                         ContentController.goToDetail(personDetailController);
                     });
+                    personName.setStyle("-fx-text-fill: gray");
                 }
                 return new VBox(gridPane);
             });

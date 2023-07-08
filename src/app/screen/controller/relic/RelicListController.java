@@ -66,6 +66,7 @@ public class RelicListController {
                     relicTitle.setCursor(Cursor.HAND);
                     relicTitle.setMaxWidth(200);
                     relicTitle.setWrapText(true);
+                    relicTitle.setStyle("-fx-text-fill: gray");
 
                     ImageView relicImage = new ImageView();
                     Image image = null;

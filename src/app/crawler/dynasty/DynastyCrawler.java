@@ -19,22 +19,14 @@ public class DynastyCrawler extends BaseWebsiteCrawler implements ICrawler {
         super("https://nguoikesu.com/dong-lich-su/hong-bang-va-van-lang", "src/app/data/json");
     }
 
-    /**
-     * find exited time of dynasty
-     *
-     * @param link
-     * @return String.
-     */
     public String findExitedTime(String link) {
         String time = ""; // crawl result
         try {
-            Document ggInfo = Jsoup.connect(link).get(); // kết nối với trang web và lấy file html về.
-            String exitedTime = ggInfo.select("span.hgKElc > b").text(); // chọn thẻ và lấy text thẻ đó.
-            // nếu không tìm được thông tin gì thì trả về chưa có dữ liệu.
+            Document ggInfo = Jsoup.connect(link).get();
+            String exitedTime = ggInfo.select("span.hgKElc > b").text();
             if (exitedTime.equals("")) {
                 time = "chưa có dữ liệu";
             }
-            // ngược lại thì lưu vào time.
             else {
                 time = exitedTime;
             }
@@ -44,84 +36,54 @@ public class DynastyCrawler extends BaseWebsiteCrawler implements ICrawler {
         return time;
     }
 
-    /**
-     * hàm tìm các vị vua của từng triều đại.
-     *
-     * @param link
-     * @return List<String>
-     */
     public List<String> findKing(String link) {
         List<String> kingName = new ArrayList<>(); // tạo list lưu kết
         Document docPage;
         try {
             docPage = Jsoup.connect(link).get(); // kết nối với link và lấy thông tin.
             Elements h2Info = docPage.select("h2[itemprop=name]");
-            // chọn lấy thông tin từ thẻ h2 và có [itemprop=name].
-            // dùng vòng for đọc thông tin.
             for (int i = 0; i < h2Info.size(); i++) {
                 String originalString = h2Info.get(i).text();
-                // nếu xâu có định dạng a - b thì tách và lưu trữ 2 xâu a và b
-                // ví dụ: Triệu Vũ Vương - Triệu Đà
                 if (originalString.contains("-")) {
                     String[] parts = originalString.split("-");
                     String part1 = parts[0].trim();
                     String part2 = parts[1].trim();
                     part2 = part2.replaceFirst("^\\s+", "");
-                    // xoá mấy dấu cách thừa đầu xâu 2 bằng cái này.
                     kingName.add(part1);
                     kingName.add(part2);
                 } else {
-                    // ngược lại thì lưu luôn xâu.
                     kingName.add(originalString);
                 }
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return kingName;
     }
-
-    /**
-     * hàm tìm kinh thành của triều đại.
-     *
-     * @param link
-     * @return String.
-     */
     public String findCapital(String link) {
-        String capital = ""; // tạo xâu chứa kết quả crawl.
+        String capital = "";
         try {
-            // đọc dữ liệu từ link.
             Document docPage = Jsoup.connect(link).get();
             try {
                 String thuDo = docPage.select("th:contains(Thủ đô)").first().nextElementSibling().text();
-                // docPage.select("th:contains(Thủ đô)") sẽ trả về một danh sách các thẻ <th> trong trang HTML có nội dung chứa chuỗi "Thủ đô".
-                // .first() sẽ trả về phần tử đầu tiên trong danh sách trả về.
-                // .nextElementSibling().text() sẽ trả về nội dung văn bản của phần tử kế tiếp sau phần tử <th> đã tìm được (thông qua phương thức nextElementSibling).
                 capital = thuDo;
             } catch (NullPointerException e) {
-                // nếu mà docPage.select("th:contains(Thủ đô)").first().nextElementSibling().text(); trả về null
-                // thì sẽ gán là chưa có dữ liệu.
-                capital = "chưa có dữ liệu";
+                capital = "no data";
             }
 
         } catch (IOException e) {
-            // nếu đọc dữ liệu từ link thất bại thì sẽ báo là chưa có dữ liệu.
-            capital = "chưa có dữ liệu";
+            capital = "no data";
         }
         return capital;
     }
 
-    /**
-     * hàm tạo và ghi ra file json.
-     */
     public void writeJsonFile(List<Dynasty> dynastyList) {
         DynastyCrawler dynastyCrawler = new DynastyCrawler();
-        // // Chuyển đổi danh sách thành JSON
+        // convert to json file
         Gson gson = new Gson();
         String json = gson.toJson(dynastyList);
 
-        // Ghi JSON vào file
+        // export to file
         try (FileWriter writer = new FileWriter(dynastyCrawler.getJsonStoreUrls() + "/dynasty.json")) {
             writer.write(json);
             System.out.println("Successfully wrote JSON to file.");
